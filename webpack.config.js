@@ -6,7 +6,7 @@ module.exports = {
   entry: './js/main.ts',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, ''),
   },
   module: {
     rules: [
@@ -19,6 +19,14 @@ module.exports = {
         type: 'asset/resource',
       },
     ],
+  },
+
+  devServer: {
+    static: {
+      directory: path.join(__dirname, ''),
+    },
+    compress: true,
+    port: 9000,
   },
 
 };
