@@ -1,1 +1,3 @@
 node_modules/
+js/firebase.ts
+public/bundle.js
