@@ -7,6 +7,6 @@ cp .gitignore
 cp template.html $projectName
 cd $projectName
 mv template.html index.html
-npm install webpack webpack-cli webpack-dev-server --save-dev
+npm install webpack webpack-cli webpack-dev-server typescript ts-loader --save-dev
 mkdir js css 
 touch js/main.ts

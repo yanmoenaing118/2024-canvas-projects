@@ -1,2 +1,6 @@
 import "./../css/style.css";
-console.log('hello from main.ts');
+import Vec from "./Vec";
+
+
+const location = new Vec(3,3);
+console.log(location);
