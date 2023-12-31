@@ -21,17 +21,4 @@ export default class GameLoop {
   }
 }
 
-/** Test Game Loop */
-const loop = new GameLoop();
-let lastDelta = 0;
-loop.run((dt, t) => {
-  //   console.log(dt);
-  if (dt - lastDelta > 0.016) {
-    console.log(`
-    dt: ${dt}
-    lastDelta: ${lastDelta}
-    dt - lastDelta: ${dt - lastDelta}
-    `);
-  }
-  lastDelta = dt;
-});
+
