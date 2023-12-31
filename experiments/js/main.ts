@@ -20,10 +20,13 @@ const loop = new GameLoop();
 let x = 10;
 let y = h / 2;
 const radius = 10;
-let vel = new Vec(100, 0);
+let vel = new Vec(300, 0);
+let air = new Vec(32,0);
 
 loop.run((dt, t) => {
   ctx.clearRect(0, 0, w, h);
+
+ 
 
   x += vel.x * dt;
 
@@ -35,6 +38,7 @@ loop.run((dt, t) => {
     console.log(dt, x);
   }
 
+//   vel.x -= air.x * dt;
   ctx.save();
   ctx.fillStyle = "pink";
 
