@@ -16,6 +16,7 @@ canvas.style.width = `${w}px`;
 canvas.style.height = `${h}px`;
 
 const loop = new GameLoop();
+console.log(w,h)
 
 let x = 10;
 let y = h / 2;
@@ -32,7 +33,10 @@ loop.run((dt, t) => {
 
   if (x > w - radius || x < radius) {
     vel.x *= -1;
+    // console.log('time take to reach ', t)
+
   }
+
 
   if(dt > 32) {
     console.log(dt, x);
