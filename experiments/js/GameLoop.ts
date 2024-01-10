@@ -7,35 +7,31 @@
 function delay() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log('hi')
-      resolve(true)
+      console.log("hi");
+      resolve(true);
     }, 5000);
-  })
+  });
 }
 
+let STEP = 1 / 60; // 60FPS
+let MULTIPLIER = 5;
+let MAX_FRAME = STEP * MULTIPLIER;
+
 export default class GameLoop {
-  run(update: (dt: number, t: number) => void) {
+  run(update: (dt: number, t: number) => void, render: () => void) {
     let dt = 0;
     let last = 0;
-    let FPS_TIME = 1 / 60;
-
-
-
 
     const loop = async (ellapsed: number) => {
       requestAnimationFrame(loop);
       const time = ellapsed / 1000;
-      dt = Math.min(FPS_TIME, time - last);
+      dt += Math.min(MAX_FRAME, time - last);
       last = time;
-      // console.log(Math.floor(last));
-
-      let delta = time - last;
-
-      while( delta >= dt ) {
-        update(dt, last);
-        delta -= dt;
+      while( dt >= STEP ) {
+        update(STEP,time);
+        dt -= STEP;
       }
-
+      render();
     };
 
     requestAnimationFrame(loop);

@@ -1,8 +1,9 @@
+import Ball from "./Ball";
 import GameLoop from "./GameLoop";
 import Vec from "./Vec";
 
-const w = 32 * 20;
-const h = 32 * 14;
+export const w = 32 * 20;
+export const h = 32 * 14;
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 
 canvas.style.border = "1px solid gray";
@@ -16,40 +17,43 @@ canvas.style.width = `${w}px`;
 canvas.style.height = `${h}px`;
 
 const loop = new GameLoop();
-console.log(w,h)
+console.log(w, h);
 
 let x = 10;
 let y = h / 2;
 const radius = 10;
 let vel = new Vec(300, 0);
-let air = new Vec(32,0);
+let air = new Vec(32, 0);
 
-loop.run((dt, t) => {
-  ctx.clearRect(0, 0, w, h);
+const balls: Ball[] = [];
 
- 
+const ball = new Ball();
 
-  x += vel.x * dt;
+for (let i = 0; i < 200; i++) {
+  balls.push(new Ball());
+}
 
-  if (x > w - radius || x < radius) {
-    vel.x *= -1;
-    // console.log('time take to reach ', t)
+loop.run(
+  (dt, t) => {
+    balls.forEach((ball) => ball.update(dt));
+  },
+  () => {
+    ctx.clearRect(0, 0, w, h);
 
+    //   vel.x -= air.x * dt;
+
+    balls.forEach((ball) => {
+      ball.render(ctx);
+    });
   }
+);
 
-
-  if(dt > 32) {
-    console.log(dt, x);
+function fibonacciRecursive(n: number) {
+  if (n <= 1) {
+    return n;
+  } else {
+    return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
   }
+}
 
-//   vel.x -= air.x * dt;
-  ctx.save();
-  ctx.fillStyle = "pink";
-
-  ctx.translate(x, y);
-
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, Math.PI * 2, true);
-  ctx.fill();
-  ctx.restore();
-});
+// Example: Generate the first 10 Fibonacci numbers
