@@ -17,7 +17,7 @@ canvas.style.width = `${w}px`;
 canvas.style.height = `${h}px`;
 
 const loop = new GameLoop();
-console.log(w, h);
+// console.log(w, h);
 
 let x = 10;
 let y = h / 2;
@@ -33,7 +33,7 @@ for (let i = 0; i < 200; i++) {
   balls.push(new Ball());
 }
 
-loop.run(
+loop.timeout(
   (dt, t) => {
     balls.forEach((ball) => ball.update(dt));
   },

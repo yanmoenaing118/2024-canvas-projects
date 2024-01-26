@@ -5,7 +5,7 @@ export default class Ball {
   vel: Vec;
   pos: Vec;
   constructor() {
-    this.vel = new Vec(Math.random() * 320, Math.random() * 200);
+    this.vel = new Vec(Math.random() * 1000, Math.random() * 1000);
 
     this.pos = new Vec(600 * Math.random(), 300 * Math.random());
   }
@@ -28,7 +28,7 @@ export default class Ball {
     ctx.translate(this.pos.x, this.pos.y);
 
     ctx.beginPath();
-    ctx.arc(0, 0, 10, 0, Math.PI * 2, true);
+    ctx.arc(0, 0, 1, 0, Math.PI * 2, true);
     ctx.fill();
     ctx.restore();
   }

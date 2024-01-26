@@ -13,27 +13,56 @@ function delay() {
   });
 }
 
-let STEP = 1 / 60; // 60FPS
-let MULTIPLIER = 5;
-let MAX_FRAME = STEP * MULTIPLIER;
+const STEP = 1 / 16;
+const MAX_FRAME = STEP * 2;
+
+// console.log(MAX_FRAME);
 
 export default class GameLoop {
   run(update: (dt: number, t: number) => void, render: () => void) {
+    const init = (ellapsed: number) => {
+      let dt = 0;
+      let last = 0;
+      // console.log('ellapsed ', ellapsed)
+      const loopy = (ms: number) => {
+        requestAnimationFrame(loopy);
+
+        const t = ms / 1000; // Let's work in seconds
+        dt += Math.min(t - last, MAX_FRAME);
+        // console.log(t - last);
+        last = t;
+
+        while (dt >= STEP) {
+          update(STEP, t);
+          dt -= STEP;
+        }
+        render();
+      };
+      requestAnimationFrame(loopy);
+    };
+
+    requestAnimationFrame(init);
+  }
+
+  timeout(update: (dt: number, t: number) => void, render: () => void) {
+
     let dt = 0;
     let last = 0;
 
-    const loop = async (ellapsed: number) => {
-      requestAnimationFrame(loop);
-      const time = ellapsed / 1000;
-      dt += Math.min(MAX_FRAME, time - last);
-      last = time;
-      while( dt >= STEP ) {
-        update(STEP,time);
-        dt -= STEP;
-      }
-      render();
-    };
+    const loop = ()=> {
 
-    requestAnimationFrame(loop);
+      const t = Date.now();
+      dt = t - last;
+      // console.log(dt, t)
+      last = t;
+
+
+      update(16 / 1000, Date.now())
+      render();
+      setTimeout(() => {
+        loop();
+      }, 1/60 * 1000);
+    }
+    loop();
   }
 }
