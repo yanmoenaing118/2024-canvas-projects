@@ -15,7 +15,7 @@ export default class Ball {
 
     if (this.pos.x > w - 5 || this.pos.x < 5) {
       this.vel.x *= -1;
-      // console.log('time take to reach ', t)
+      console.log('time take to reach ', this.vel)
     }
     if(this.pos.y > h - 10 || this.pos.y < 5) {
         this.vel.y *= -1;
