@@ -1,12 +1,22 @@
+import run from "./loop";
+
 const canvas = document.querySelector("canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d");
+const width = canvas.width;
+const height = canvas.height;
+const tileSize = 32;
 
-ctx.fillStyle = "pink";
-ctx.fillRect(100,100,200,200);
-ctx.strokeRect(100,100,200,200);
+const src = "/assets/ams.png";
+const img = new Image();
+img.src = src;
 
-ctx.fillStyle = "rgba(0,0,0,0.6)";
-ctx.beginPath();
-ctx.arc(100,100, 50, 0, Math.PI * 0.6, false);
-// ctx.fill();
-ctx.stroke();
+const update = (dt: number, time: number) => {};
+
+const render = (dt: number) => {
+  ctx.clearRect(0, 0, width, height);
+};
+
+run((dt, time) => {
+  update(dt, time);
+  render(dt);
+});
